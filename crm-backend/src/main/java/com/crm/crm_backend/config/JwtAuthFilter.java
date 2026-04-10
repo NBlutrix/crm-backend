@@ -35,7 +35,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String authHeader = request.getHeader("Authorization");
 
-        System.out.println("=== JWT FILTER === Authorization header: " + authHeader);
+
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
@@ -44,7 +44,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String token = authHeader.substring(7);
 
-        System.out.println("=== JWT FILTER === Token valid: " + jwtUtil.isTokenValid(token));
+
 
         if (!jwtUtil.isTokenValid(token)) {
             filterChain.doFilter(request, response);
@@ -65,7 +65,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         context.setAuthentication(authentication);
         securityContextHolderStrategy.setContext(context);
 
-        System.out.println("=== JWT FILTER === Auth set for: " + email + " role: " + role);
+
 
         filterChain.doFilter(request, response);
     }
