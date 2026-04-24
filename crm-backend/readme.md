@@ -55,3 +55,6 @@ API je dostupan na `http://localhost:8080`
 
 ## Frontend
 React frontend je dostupan na: [crm-frontend](https://github.com/TVOJE_IME/crm-frontend)
+
+## API Dokumentacija
+Swagger UI: `http://localhost:8080/swagger-ui/index.html`
