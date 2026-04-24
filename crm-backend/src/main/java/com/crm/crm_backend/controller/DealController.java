@@ -7,24 +7,30 @@ import com.crm.crm_backend.dto.DealResponse;
 import com.crm.crm_backend.model.Activity;
 import com.crm.crm_backend.model.DealStage;
 import com.crm.crm_backend.service.DealService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Deals", description = "Deal pipeline management")
 public class DealController {
 
     private final DealService dealService;
 
     @GetMapping("/api/deals")
+    @Operation(summary = "Lista svih deala, filter po stage-u")
     public ResponseEntity<List<DealResponse>> getAllDeals(
             @RequestParam(required = false) DealStage stage) {
         return ResponseEntity.ok(dealService.getAllDeals(stage));
     }
 
     @PostMapping("/api/deals")
+    @Operation(summary = "Kreiranje novog deala")
     public ResponseEntity<DealResponse> createDeal(@RequestBody DealRequest request) {
         return ResponseEntity.ok(dealService.createDeal(request));
     }
@@ -37,6 +43,7 @@ public class DealController {
     }
 
     @PutMapping("/api/deals/{id}/stage")
+    @Operation(summary = "Promena stage-a deala")
     public ResponseEntity<DealResponse> updateStage(
             @PathVariable Long id,
             @RequestParam DealStage stage) {
@@ -55,6 +62,7 @@ public class DealController {
     }
 
     @GetMapping("/api/dashboard/stats")
+    @Operation(summary = "Dashboard statistike")
     public ResponseEntity<DashboardStats> getDashboardStats() {
         return ResponseEntity.ok(dealService.getDashboardStats());
     }
